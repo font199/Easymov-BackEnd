@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.entity.Usuari;
-import com.example.demo.repository.UsuariRepo;
+import com.example.demo.repository.UsuariRepo; 
 
 
 
