@@ -12,7 +12,7 @@ public class Usuari {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	private String idGoogle;
+	private String idGoogle; 
 	
 	private String mail;
 
