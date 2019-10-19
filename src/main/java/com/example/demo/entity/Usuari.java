@@ -1,30 +1,45 @@
 package com.example.demo.entity;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
 public class Usuari {
 
 	@Id
-	private Long idUsuari;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 	
-	private String nom;
+	private String idGoogle;
+	
+	private String mail;
 
-	public Long getIdUsuari() {
-		return idUsuari;
+	public Long getId() {
+		return id;
 	}
 
-	public void setIdUsuari(Long idUsuari) {
-		this.idUsuari = idUsuari;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
-	public String getNom() {
-		return nom;
+	public String getIdGoogle() {
+		return idGoogle;
 	}
 
-	public void setNom(String nom) {
-		this.nom = nom;
+	public void setIdGoogle(String idGoogle) {
+		this.idGoogle = idGoogle;
 	}
+
+	public String getMail() {
+		return mail;
+	}
+
+	public void setMail(String mail) {
+		this.mail = mail;
+	}
+
+	
 	
 }
