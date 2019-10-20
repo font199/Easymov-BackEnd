@@ -42,14 +42,4 @@ public class UsuariController {
 		repo.deleteById(id);
 	}
 
-//	@RequestMapping(value = "/usuari", method = RequestMethod.GET)
-//    public List<Usuari> getEmployees() {
-//		return repo.findAll();
-//	}
-
-//	@GetMapping("/person/{id}")
-//	  public @ResponseBody ResponseEntity<String> getPersonById(@PathVariable String id){
-//	    return new ResponseEntity<String>("Response from GET with id " +id,HttpStatus.OK); 
-//	
-
 }
