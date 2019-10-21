@@ -6,8 +6,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 
-import io.swagger.annotations.ApiModelProperty;
-
 @Entity 
 public class Usuari {
 
@@ -16,12 +14,11 @@ public class Usuari {
 //	@ApiModelProperty(hidden=true)
 	private Long id;
 	
-
+	@NotNull
 	private String nom;
 	
 	private String fotoURL;
 	
-
 	@NotNull
 	private String idGoogle; 
 	
@@ -71,3 +68,4 @@ public class Usuari {
 	
 	
 }
+
