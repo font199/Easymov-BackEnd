@@ -13,12 +13,16 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.entity.Usuari;
 import com.example.demo.repository.UsuariRepo;
+import com.example.demo.service.UsuariService;
 
 @RestController
 public class UsuariController {
 
 	@Autowired
 	private UsuariRepo repo;
+	
+	@Autowired
+	private UsuariService usuariService;
 
 	@GetMapping("/usuaris")
 	public List<Usuari> llistar() {
@@ -27,8 +31,7 @@ public class UsuariController {
 
 	@PostMapping("/usuari")
 	public Long insertar(@RequestBody Usuari usuari) {
-		Usuari usuariCreat = repo.save(usuari);
-		return usuariCreat.getId();
+		return usuariService.registrar(usuari);
 	}
 
 	@PutMapping("/usuari")
