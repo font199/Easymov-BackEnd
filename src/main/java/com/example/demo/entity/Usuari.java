@@ -12,6 +12,10 @@ public class Usuari {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
+	private String nom;
+	
+	private String fotoURL;
+	
 	private String idGoogle; 
 	
 	private String mail;
@@ -22,6 +26,22 @@ public class Usuari {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public String getNom() {
+		return nom;
+	}
+
+	public void setNom(String nom) {
+		this.nom = nom;
+	}
+
+	public String getFotoURL() {
+		return fotoURL;
+	}
+
+	public void setFotoURL(String fotoURL) {
+		this.fotoURL = fotoURL;
 	}
 
 	public String getIdGoogle() {
