@@ -4,20 +4,28 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
+
+import io.swagger.annotations.ApiModelProperty;
 
 @Entity 
 public class Usuari {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+//	@ApiModelProperty(hidden=true)
 	private Long id;
 	
+
 	private String nom;
 	
 	private String fotoURL;
 	
+
+	@NotNull
 	private String idGoogle; 
 	
+	@NotNull
 	private String mail;
 
 	public Long getId() {
