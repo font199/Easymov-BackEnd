@@ -34,9 +34,9 @@ public class UsuariController {
 		return usuariService.registrar(usuari);
 	}
 
-	@PutMapping("/usuari")
-	public Long modificar(@RequestBody Usuari usuari) {
-		Usuari usuariModificat = repo.save(usuari);
+	@PutMapping("/usuari/{id}")
+	public Long modificar(@PathVariable Long id, @RequestBody Usuari usuari) {
+		Usuari usuariModificat = repo. save(usuari);
 		return usuariModificat.getId();
 	}
 
