@@ -7,11 +7,11 @@ import javax.persistence.Id;
 
 @Entity
 public class Obstacle {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	private String name;
+	private String nom;
 	private String fotoUrl;
 	private long longitud;
 	private long latitud;
@@ -25,14 +25,6 @@ public class Obstacle {
 		this.id = id;
 	}
 
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
 	public String getFotoUrl() {
 		return fotoUrl;
 	}
@@ -40,7 +32,7 @@ public class Obstacle {
 	public void setFotoUrl(String fotoUrl) {
 		this.fotoUrl = fotoUrl;
 	}
-	
+
 	public String getDescripcio() {
 		return descripcio;
 	}
@@ -49,19 +41,27 @@ public class Obstacle {
 		this.descripcio = descripcio;
 	}
 
-	public long getLogitud() {
-		return longitud;
-	}
-
-	public void setLogitud(long logitud) {
-		this.longitud = logitud;
-	}
-
 	public long getLatitud() {
 		return latitud;
 	}
 
 	public void setLatitud(long latitud) {
 		this.latitud = latitud;
+	}
+
+	public long getLongitud() {
+		return longitud;
+	}
+
+	public void setLongitud(long longitud) {
+		this.longitud = longitud;
+	}
+
+	public String getNom() {
+		return nom;
+	}
+
+	public void setNom(String nom) {
+		this.nom = nom;
 	}
 }
