@@ -11,38 +11,40 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.demo.entity.Usuari;
-import com.example.demo.repository.UsuariRepo;
+import com.example.demo.dto.UsuariDto;
 import com.example.demo.service.UsuariService;
 
 @RestController
 public class UsuariController {
-
-	@Autowired
-	private UsuariRepo repo;
 	
 	@Autowired
 	private UsuariService usuariService;
 
 	@GetMapping("/usuaris")
-	public List<Usuari> llistar() {
-		return repo.findAll();
+	public List<UsuariDto> llistar() {
+		return usuariService.llistar();
+	}
+	
+	@GetMapping("/usuari/{id}")
+	public UsuariDto buscar(@PathVariable Long id) {
+		return usuariService.buscar(id);
 	}
 
 	@PostMapping("/usuari")
-	public Long insertar(@RequestBody Usuari usuari) {
-		return usuariService.registrar(usuari);
+	public Long insertar(@RequestBody UsuariDto usuariDto) {
+		return usuariService.registrar(usuariDto);
 	}
 
 	@PutMapping("/usuari/{id}")
-	public Long modificar(@PathVariable Long id, @RequestBody Usuari usuari) {
-		Usuari usuariModificat = repo. save(usuari);
-		return usuariModificat.getId();
+	public Long modificar(@PathVariable Long id, @RequestBody UsuariDto usuariDto) {
+		return usuariService.modificar(id, usuariDto);
+	
 	}
 
 	@DeleteMapping("/usuari/{id}")
 	public void eliminar(@PathVariable Long id) {
-		repo.deleteById(id);
+		usuariService.eliminar(id);
+		
 	}
 
 }

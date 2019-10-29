@@ -1,7 +1,6 @@
 package com.example.demo.rest;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -12,39 +11,37 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.demo.repository.ObstacleRepo;
-import com.example.demo.entity.Obstacle;
+import com.example.demo.dto.ObstacleDto;
+import com.example.demo.service.ObstacleService;
 
 @RestController
 public class ObstacleController {
 
 	@Autowired
-	private ObstacleRepo repo;
+	private ObstacleService obstacleService;
 	
 	@GetMapping("/obstacles")
-	public List<Obstacle> llistar() {
-		return repo.findAll();
+	public List<ObstacleDto> llistar() {
+		return obstacleService.llistar();
 	}
 	
 	@GetMapping("/obstacle/{id}")
-	public Optional<Obstacle> GetObstacle(@PathVariable int id) {
-		return repo.findById(id);
+	public ObstacleDto GetObstacle(@PathVariable int id) {
+		return obstacleService.getObstacle(id);
 	}
 
 	@PostMapping("/obstacle")
-	public int insertar(@RequestBody Obstacle obstacle) {
-		Obstacle obstacleNou = repo.save(obstacle);
-		return obstacleNou.getId();
+	public int insertar(@RequestBody ObstacleDto obstacleDto) {
+		return obstacleService.insertar(obstacleDto);
 	}
 
-	@PutMapping("/obstacle")
-	public int modificar(@RequestBody Obstacle obstacle) {
-		Obstacle obstacleModificat = repo.save(obstacle);
-		return obstacleModificat.getId();
+	@PutMapping("/obstacle/{id}")
+	public int modificar(@PathVariable int id, @RequestBody ObstacleDto obstacleDto) {
+		return obstacleService.modificar(id, obstacleDto);
 	}
 
 	@DeleteMapping("/obstacle/{id}")
 	public void eliminar(@PathVariable int id) {
-		repo.deleteById(id);
+		 obstacleService.eliminar(id);
 	}
 }
