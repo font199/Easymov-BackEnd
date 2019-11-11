@@ -28,7 +28,7 @@ public class UsuariService {
     private UsuariDtoConversor usuariDtoConversor;
 	
     @Transactional
-	public Long registrar(UsuariDto usuariDto) {
+	public int registrar(UsuariDto usuariDto) {
 		
 		 Optional<Usuari> usuariExistent =  usuariRepo.findByIdGoogle(usuariDto.getIdGoogle());
 		 Usuari usuari = usuariDtoConversor.usuariDtoToUsuari(usuariDto);
@@ -42,7 +42,7 @@ public class UsuariService {
 	}
 	
 	@Transactional
-	public Long modificar(Long id, UsuariDto usuariDto) {
+	public int modificar(int id, UsuariDto usuariDto) {
 		
 		Optional<Usuari> usuariExistent =  usuariRepo.findById(id);
 		
@@ -65,7 +65,7 @@ public class UsuariService {
 		return listUsuarisDto;
 	}
 	
-	public UsuariDto buscar(Long id) {
+	public UsuariDto buscar(int id) {
 		UsuariDto usuariDto = new UsuariDto();
 		Usuari usuari = usuariRepo.getOne(id);
 		try {
@@ -76,8 +76,8 @@ public class UsuariService {
 		}
 		return usuariDto;
 	}
-
-	public void eliminar(Long id) {
+ 
+	public void eliminar(int id) {
 		Optional<Usuari> usuariExistent =  usuariRepo.findById(id);
 		if(usuariExistent.isPresent()) {
 			usuariRepo.deleteById(id);

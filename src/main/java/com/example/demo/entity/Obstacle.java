@@ -1,9 +1,13 @@
 package com.example.demo.entity;
 
+import java.util.Optional;
+
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Obstacle {
@@ -16,6 +20,11 @@ public class Obstacle {
 	private long longitud;
 	private long latitud;
 	private String descripcio;
+	private int idUsuariCreador;
+	
+////	@JoinColumn(name = "fk_usuari", nullable = false)
+//    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+//	private Usuari usuariObst;
 
 	public int getId() {
 		return id;
@@ -64,4 +73,15 @@ public class Obstacle {
 	public void setNom(String nom) {
 		this.nom = nom;
 	}
+
+	public int getIdUsuariCreador() {
+		return idUsuariCreador;
+	}
+
+	public void setIdUsuariCreador(int idUsuariCreador) {
+		this.idUsuariCreador = idUsuariCreador;
+	}
+
+
+	
 }

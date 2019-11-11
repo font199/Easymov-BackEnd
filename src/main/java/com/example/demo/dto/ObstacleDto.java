@@ -23,6 +23,8 @@ public class ObstacleDto implements Serializable {
 	@NotNull
 	private long latitud;
 	private String descripcio;
+	@NotNull
+	private int idUsuariCreador;
 
 	public int getId() {
 		return id;
@@ -71,5 +73,15 @@ public class ObstacleDto implements Serializable {
 	public void setDescripcio(String descripcio) {
 		this.descripcio = descripcio;
 	}
+
+	public int getIdUsuariCreador() {
+		return idUsuariCreador;
+	}
+
+	public void setIdUsuariCreador(int idUsuariCreador) {
+		this.idUsuariCreador = idUsuariCreador;
+	}
+	
+	
 
 }

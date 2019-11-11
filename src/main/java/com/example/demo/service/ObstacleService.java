@@ -13,9 +13,11 @@ import org.springframework.stereotype.Service;
 import com.example.demo.dto.ObstacleDto;
 import com.example.demo.dto.ObstacleDtoConversor;
 import com.example.demo.entity.Obstacle;
+import com.example.demo.entity.Usuari;
 import com.example.demo.exceptions.TaskManagerBussinessException;
 import com.example.demo.exceptions.codes.ExceptionsCodes;
 import com.example.demo.repository.ObstacleRepo;
+import com.example.demo.repository.UsuariRepo;
 
 
 @Service
@@ -23,6 +25,9 @@ public class ObstacleService {
 
 	@Autowired
 	private ObstacleRepo obstacleRepo;
+	
+	@Autowired
+	private UsuariRepo usuariRepo;
 	
 	@Autowired 
 	private ObstacleDtoConversor obstacleDtoConversor;
@@ -39,8 +44,8 @@ public class ObstacleService {
 		try {
 			obstacleDto = obstacleDtoConversor.obstacleToObstacleDto(obstacle);
 		} catch (EntityNotFoundException ex) {
-			throw new TaskManagerBussinessException(ExceptionsCodes.OBS_NOT_FOUND, HttpStatus.NOT_FOUND,
-					"obstacle_id_" + id + "_not_found");
+			throw new TaskManagerBussinessException(ExceptionsCodes.USE_EMPTY_RESULT, HttpStatus.NOT_FOUND,
+					"usuari_id_" + id + "_empty_result");
 		}
 		return obstacleDto;
 	}
@@ -49,9 +54,16 @@ public class ObstacleService {
 		Optional<Obstacle> obstacleExistent =  obstacleRepo.findByLongitudAndLatitud(obstacleDto.getLongitud(), obstacleDto.getLatitud());
 		Obstacle obtacle = obstacleDtoConversor.obstacleDtoToObstacle(obstacleDto);
 		
-	 	if(!obstacleExistent.isPresent()) { 
-    		Obstacle obstacleCreat = obstacleRepo.save(obtacle);
-    		return obstacleCreat.getId();
+	 	if(!obstacleExistent.isPresent()) {
+	 		
+	 		Usuari u = usuariRepo.findById(obstacleDto.getIdUsuariCreador())
+	 		        .orElseThrow(() -> new TaskManagerBussinessException(ExceptionsCodes.USE_EMPTY_RESULT, HttpStatus.FOUND,
+							"Usuari no existent"));
+	 	
+		 		obstacleRepo.save(obtacle);
+		 		Obstacle obstacleCreat = obstacleRepo.save(obtacle);
+	    		return obstacleCreat.getId();
+    		
     	} else { 
     		throw new TaskManagerBussinessException(ExceptionsCodes.OBS_DUPLICATE, HttpStatus.CONFLICT,
 					"longitud_i_latitud_ja_existents");
