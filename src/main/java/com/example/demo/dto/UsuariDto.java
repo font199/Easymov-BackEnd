@@ -14,7 +14,7 @@ public class UsuariDto implements Serializable {
 
 	private static final long serialVersionUID = 6185001674605611857L;
 
-	private Long id;
+	private int id;
 	@NotNull
 	private String nom;
 	private String fotoURL;
@@ -55,12 +55,14 @@ public class UsuariDto implements Serializable {
 		this.mail = mail;
 	}
 
-	public Long getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(int id) {
 		this.id = id;
 	}
+
+
 
 }

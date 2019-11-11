@@ -26,23 +26,23 @@ public class UsuariController {
 	}
 	
 	@GetMapping("/usuari/{id}")
-	public UsuariDto buscar(@PathVariable Long id) {
+	public UsuariDto buscar(@PathVariable int id) {
 		return usuariService.buscar(id);
 	}
 
 	@PostMapping("/usuari")
-	public Long insertar(@RequestBody UsuariDto usuariDto) {
+	public int insertar(@RequestBody UsuariDto usuariDto) {
 		return usuariService.registrar(usuariDto);
 	}
 
 	@PutMapping("/usuari/{id}")
-	public Long modificar(@PathVariable Long id, @RequestBody UsuariDto usuariDto) {
+	public int modificar(@PathVariable int id, @RequestBody UsuariDto usuariDto) {
 		return usuariService.modificar(id, usuariDto);
 	
 	}
 
 	@DeleteMapping("/usuari/{id}")
-	public void eliminar(@PathVariable Long id) {
+	public void eliminar(@PathVariable int id) {
 		usuariService.eliminar(id);
 		
 	}

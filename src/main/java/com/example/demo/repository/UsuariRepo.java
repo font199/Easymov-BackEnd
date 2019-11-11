@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import com.example.demo.entity.Usuari;
 
 @Repository
-public interface UsuariRepo extends JpaRepository <Usuari, Long>{
+public interface UsuariRepo extends JpaRepository <Usuari, Integer>{
 	
 	 Optional<Usuari> findByIdGoogle(String idGoogle);
 

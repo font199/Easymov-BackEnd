@@ -28,6 +28,7 @@ public class UsuariDtoConversor {
 		usuariDto.setMail(usuari.getMail());
 		usuariDto.setFotoURL(usuari.getFotoURL());
 		
+		// Todo: retornar llistat de obstacles nomes per la crida del getUsuari i no de getUsuaris
 		return usuariDto;
 		
 	}
