@@ -35,7 +35,10 @@ public class UsuariService {
 		
 	 	if(usuariExistent.isPresent()) { // si l'usuari existeix, retornem la seva id
     		return usuariExistent.get().getId();
-    	} else { // si l'usuari no existeix el crearem i retornem la seva id
+    	} else {
+    		//inicialitzem la puntuacio a 0
+    		usuari.setPuntuacio(0);
+    		// si l'usuari no existeix el crearem i retornem la seva id
     		Usuari usuariCreat = usuariRepo.save(usuari);
     		return usuariCreat.getId();
     	}

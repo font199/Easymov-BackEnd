@@ -15,6 +15,7 @@ public class UsuariDtoConversor {
 		usuari.setNom(usuariDto.getNom());
 		usuari.setMail(usuariDto.getMail());
 		usuari.setFotoURL(usuariDto.getFotoURL());
+		usuari.setPuntuacio(usuariDto.getPuntuacio());
 		
 		return usuari;
 	}
@@ -27,6 +28,7 @@ public class UsuariDtoConversor {
 		usuariDto.setIdGoogle(usuari.getIdGoogle());
 		usuariDto.setMail(usuari.getMail());
 		usuariDto.setFotoURL(usuari.getFotoURL());
+		usuariDto.setPuntuacio(usuari.getPuntuacio());
 		
 		// Todo: retornar llistat de obstacles nomes per la crida del getUsuari i no de getUsuaris
 		return usuariDto;

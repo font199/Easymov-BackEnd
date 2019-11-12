@@ -30,6 +30,8 @@ public class Usuari {
 	
 	@OneToMany(mappedBy = "idUsuariCreador")
 	private List<Obstacle> obstacles;
+	
+	private int puntuacio;
 
 	public int getId() {
 		return id;
@@ -69,6 +71,23 @@ public class Usuari {
 
 	public void setMail(String mail) {
 		this.mail = mail;
+	}
+
+	public int getPuntuacio() {
+		return puntuacio;
+	}
+
+	public void setPuntuacio(int puntuacio) {
+		this.puntuacio = puntuacio;
+	}
+	
+	public void incrementarPuntuacio(int p) {
+		this.puntuacio += p;
+	}
+	
+	public void decrementarPuntuacio(int p)
+	{
+		this.puntuacio -= p;
 	}
 
 	
