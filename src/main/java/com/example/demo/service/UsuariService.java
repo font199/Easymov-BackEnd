@@ -91,22 +91,46 @@ public class UsuariService {
 		}
 	}
 
-	public int puntuar(PuntuacioDto puntuacioDto) {
-		Optional<Usuari> usuariExistent =  usuariRepo.findById(puntuacioDto.getId());
+	public int puntuar(int id, PuntuacioDto puntuacioDto) {
+		Optional<Usuari> usuariExistent =  usuariRepo.findById(id);
 		if(usuariExistent.isPresent()) {
 			Usuari usuari = usuariExistent.get();
 			usuari.setPuntuacio(puntuacioDto.getPuntuacio());
 			usuariRepo.save(usuari);
 			return usuari.getId();
 		}else {
-			throw new TaskManagerBussinessException(ExceptionsCodes.USE_NOT_FOUND, HttpStatus.NOT_FOUND,
-					"usuari_no_existeix");
-		}
-		
+			throw new TaskManagerBussinessException(ExceptionsCodes.USE_NOT_FOUND, HttpStatus.NOT_FOUND,"usuari_no_existeix");
+		}	
+	}
+	
+	public int incrementarPuntuacio(int id, PuntuacioDto puntuacioDto) {
+		Optional<Usuari> usuariExistent =  usuariRepo.findById(id);
+		if(usuariExistent.isPresent()) {
+			Usuari usuari = usuariExistent.get();
+			usuari.incrementarPuntuacio(puntuacioDto.getPuntuacio());
+			usuariRepo.save(usuari);
+			return usuari.getId();
+		}else {
+			throw new TaskManagerBussinessException(ExceptionsCodes.USE_NOT_FOUND, HttpStatus.NOT_FOUND,"usuari_no_existeix");
+		}	
+	}
+	
+	public int decrementarPuntuacio(int id, PuntuacioDto puntuacioDto) {
+		Optional<Usuari> usuariExistent =  usuariRepo.findById(id);
+		if(usuariExistent.isPresent()) {
+			Usuari usuari = usuariExistent.get();
+			usuari.decrementarPuntuacio(puntuacioDto.getPuntuacio());
+			usuariRepo.save(usuari);
+			return usuari.getId();
+		}else {
+			throw new TaskManagerBussinessException(ExceptionsCodes.USE_NOT_FOUND, HttpStatus.NOT_FOUND,"usuari_no_existeix");
+		}	
+	}
+	
+	public List<UsuariDto> ranking(){
+		List<UsuariDto>  listUsuarisDto = new ArrayList<UsuariDto>();
+		usuariRepo.findAll().stream().map(usuariDtoConversor::usuariToUsuariDto).forEach(listUsuarisDto ::add);
+		return listUsuarisDto;
 	}
 
-
-	
-	
-	
 }
