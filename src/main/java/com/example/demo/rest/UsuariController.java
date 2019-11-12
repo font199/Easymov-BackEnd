@@ -45,7 +45,11 @@ public class UsuariController {
 	@DeleteMapping("/usuari/{id}")
 	public void eliminar(@PathVariable int id) {
 		usuariService.eliminar(id);
-		
+		}
+	
+	@PutMapping("/usuari/{id}/puntuar/{puntuacio}")
+	public int puntuarUsuari(@PathVariable int id, @PathVariable int puntuacio, @RequestBody UsuariDto usuariDto) {
+		return usuariService.puntuar(id, puntuacio, usuariDto);
 	}
 	
 

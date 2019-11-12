@@ -59,7 +59,7 @@ public class ObstacleService {
 	 		Usuari u = usuariRepo.findById(obstacleDto.getIdUsuariCreador())
 	 		        .orElseThrow(() -> new TaskManagerBussinessException(ExceptionsCodes.USE_EMPTY_RESULT, HttpStatus.FOUND,
 							"Usuari no existent"));
-	 	
+	 			u.incrementarPuntuacio(10);//augmentem 10 punts per crear un obstacle
 		 		obstacleRepo.save(obtacle);
 		 		Obstacle obstacleCreat = obstacleRepo.save(obtacle);
 	    		return obstacleCreat.getId();

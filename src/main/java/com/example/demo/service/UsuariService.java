@@ -90,6 +90,22 @@ public class UsuariService {
 					"usuari_id_" + id + "_empty_result");
 		}
 	}
+
+	public int puntuar(int id, int puntuacio, UsuariDto usuariDto) {
+		Optional<Usuari> usuariExistent =  usuariRepo.findById(id);
+		if(usuariExistent.isPresent()) {
+			Usuari usuari = usuariDtoConversor.usuariDtoToUsuari(usuariDto);
+			usuari.setPuntuacio(puntuacio);
+			usuariRepo.save(usuari);
+			return id;
+		}else {
+			throw new TaskManagerBussinessException(ExceptionsCodes.USE_NOT_FOUND, HttpStatus.NOT_FOUND,
+					"usuari_no_existeix");
+		}
+		
+	}
+
+
 	
 	
 	
