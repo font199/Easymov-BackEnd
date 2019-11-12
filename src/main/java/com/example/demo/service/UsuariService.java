@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.example.demo.dto.PuntuacioDto;
 import com.example.demo.dto.UsuariDto;
 import com.example.demo.dto.UsuariDtoConversor;
 import com.example.demo.entity.Usuari;
@@ -90,13 +91,13 @@ public class UsuariService {
 		}
 	}
 
-	public int puntuar(int id, int puntuacio, UsuariDto usuariDto) {
-		Optional<Usuari> usuariExistent =  usuariRepo.findById(id);
+	public int puntuar(PuntuacioDto puntuacioDto) {
+		Optional<Usuari> usuariExistent =  usuariRepo.findById(puntuacioDto.getId());
 		if(usuariExistent.isPresent()) {
-			Usuari usuari = usuariDtoConversor.usuariDtoToUsuari(usuariDto);
-			usuari.setPuntuacio(puntuacio);
+			Usuari usuari = usuariExistent.get();
+			usuari.setPuntuacio(puntuacioDto.getPuntuacio());
 			usuariRepo.save(usuari);
-			return id;
+			return usuari.getId();
 		}else {
 			throw new TaskManagerBussinessException(ExceptionsCodes.USE_NOT_FOUND, HttpStatus.NOT_FOUND,
 					"usuari_no_existeix");
