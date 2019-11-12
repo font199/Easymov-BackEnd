@@ -48,9 +48,26 @@ public class UsuariController {
 		usuariService.eliminar(id);
 		}
 	
-	@PutMapping("/usuari")
-	public int puntuarUsuari(@RequestBody PuntuacioDto puntuacioDto) {
-		return usuariService.puntuar(puntuacioDto);
+	@PutMapping("puntuar/{id}")
+	public int puntuarUsuari(@PathVariable int id, @RequestBody PuntuacioDto puntuacioDto) {
+		return usuariService.puntuar(id, puntuacioDto);
+	}
+	
+	@PutMapping("like/{id}")
+	public int incrementarPuntuacio(@PathVariable int id, @RequestBody PuntuacioDto puntuacioDto) {
+		return usuariService.incrementarPuntuacio(id, puntuacioDto);
+	}
+	
+	@PutMapping("dislike/{id}")
+	public int decrementarPuntuacio(@PathVariable int id, @RequestBody PuntuacioDto puntuacioDto) {
+		return usuariService.decrementarPuntuacio(id, puntuacioDto);
+	}
+	
+	
+	@GetMapping("/ranking")
+	//falta implentar el sort
+	public List<UsuariDto> ranking() {
+		return usuariService.llistar();
 	}
 	
 
