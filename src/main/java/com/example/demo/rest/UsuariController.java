@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.demo.dto.PuntuacioDto;
 import com.example.demo.dto.UsuariDto;
 import com.example.demo.dto.UsuariResDto;
 import com.example.demo.service.UsuariService;
@@ -47,9 +48,9 @@ public class UsuariController {
 		usuariService.eliminar(id);
 		}
 	
-	@PutMapping("/usuari/{id}/puntuar/{puntuacio}")
-	public int puntuarUsuari(@PathVariable int id, @PathVariable int puntuacio, @RequestBody UsuariDto usuariDto) {
-		return usuariService.puntuar(id, puntuacio, usuariDto);
+	@PutMapping("/usuari")
+	public int puntuarUsuari(@RequestBody PuntuacioDto puntuacioDto) {
+		return usuariService.puntuar(puntuacioDto);
 	}
 	
 
