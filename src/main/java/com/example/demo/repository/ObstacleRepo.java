@@ -10,6 +10,6 @@ import com.example.demo.entity.Obstacle;
 @Repository
 public interface ObstacleRepo extends JpaRepository <Obstacle, Integer>{
 	
-	Optional<Obstacle> findByLongitudAndLatitud(Long longitud, Long latitud);
+	Optional<Obstacle> findByLongitudAndLatitud(double longitud, double latitud);
 
 }

@@ -1,13 +1,9 @@
 package com.example.demo.entity;
 
-import java.util.Optional;
-
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 
 @Entity
 public class Obstacle {
@@ -17,8 +13,8 @@ public class Obstacle {
 	private int id;
 	private String nom;
 	private String fotoUrl;
-	private long longitud;
-	private long latitud;
+	private double longitud;
+	private double latitud;
 	private String descripcio;
 	private int idUsuariCreador;
 	
@@ -50,19 +46,19 @@ public class Obstacle {
 		this.descripcio = descripcio;
 	}
 
-	public long getLatitud() {
+	public double getLatitud() {
 		return latitud;
 	}
 
-	public void setLatitud(long latitud) {
+	public void setLatitud(double latitud) {
 		this.latitud = latitud;
 	}
 
-	public long getLongitud() {
+	public double getLongitud() {
 		return longitud;
 	}
 
-	public void setLongitud(long longitud) {
+	public void setLongitud(double longitud) {
 		this.longitud = longitud;
 	}
 
