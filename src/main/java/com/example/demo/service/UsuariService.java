@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.example.demo.dto.UsuariDto;
 import com.example.demo.dto.UsuariDtoConversor;
+import com.example.demo.dto.UsuariResDto;
 import com.example.demo.entity.Usuari;
 import com.example.demo.exceptions.TaskManagerBussinessException;
 import com.example.demo.exceptions.codes.ExceptionsCodes;
@@ -65,16 +66,16 @@ public class UsuariService {
 		return listUsuarisDto;
 	}
 	
-	public UsuariDto buscar(int id) {
-		UsuariDto usuariDto = new UsuariDto();
+	public UsuariResDto buscar(int id) {
+		UsuariResDto usuariResDto = new UsuariResDto();
 		Usuari usuari = usuariRepo.getOne(id);
 		try {
-			usuariDto = usuariDtoConversor.usuariToUsuariDto(usuari);
+			usuariResDto = usuariDtoConversor.usuariToUsuariDto2(usuari);
 		} catch (EntityNotFoundException ex) {
 			throw new TaskManagerBussinessException(ExceptionsCodes.USE_NOT_FOUND, HttpStatus.NOT_FOUND,
 					"usuari_id_" + id + "_not_found");
 		}
-		return usuariDto;
+		return usuariResDto;
 	}
  
 	public void eliminar(int id) {

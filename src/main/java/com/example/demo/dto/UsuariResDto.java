@@ -12,7 +12,7 @@ import io.swagger.annotations.Api;
 
 @Api
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class UsuariDto implements Serializable {
+public class UsuariResDto implements Serializable {
 
 	private static final long serialVersionUID = 6185001674605611857L;
 
@@ -24,6 +24,8 @@ public class UsuariDto implements Serializable {
 	private String idGoogle;
 	@NotNull
 	private String mail;
+	
+	private List<Integer> obstaclesIds = new ArrayList<>();
 
 	public String getNom() {
 		return nom;
@@ -63,6 +65,14 @@ public class UsuariDto implements Serializable {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	public List<Integer> getObstaclesIds() {
+		return obstaclesIds;
+	}
+
+	public void setObstaclesIds(List<Integer> obstaclesIds) {
+		this.obstaclesIds = obstaclesIds;
 	}
 
 
