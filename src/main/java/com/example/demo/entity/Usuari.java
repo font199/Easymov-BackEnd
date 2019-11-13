@@ -71,6 +71,14 @@ public class Usuari {
 		this.mail = mail;
 	}
 
+	public List<Obstacle> getObstacles() {
+		return obstacles;
+	}
+
+	public void setObstacles(List<Obstacle> obstacles) {
+		this.obstacles = obstacles;
+	}
+
 	
 	
 }

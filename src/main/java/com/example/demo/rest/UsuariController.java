@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.dto.UsuariDto;
+import com.example.demo.dto.UsuariResDto;
 import com.example.demo.service.UsuariService;
 
 @RestController
@@ -26,7 +27,7 @@ public class UsuariController {
 	}
 	
 	@GetMapping("/usuari/{id}")
-	public UsuariDto buscar(@PathVariable int id) {
+	public UsuariResDto buscar(@PathVariable int id) {
 		return usuariService.buscar(id);
 	}
 
@@ -46,5 +47,6 @@ public class UsuariController {
 		usuariService.eliminar(id);
 		
 	}
+	
 
 }
