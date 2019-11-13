@@ -18,10 +18,8 @@ public class ObstacleDto implements Serializable {
 	@NotNull
 	private String nom;
 	private String foto;
-	@NotNull
-	private long longitud;
-	@NotNull
-	private long latitud;
+	private double longitud;
+	private double latitud;
 	private String descripcio;
 	@NotNull
 	private int idUsuariCreador;
@@ -50,19 +48,19 @@ public class ObstacleDto implements Serializable {
 		this.foto = foto;
 	}
 
-	public long getLongitud() {
+	public double getLongitud() {
 		return longitud;
 	}
 
-	public void setLongitud(long longitud) {
+	public void setLongitud(double longitud) {
 		this.longitud = longitud;
 	}
 
-	public long getLatitud() {
+	public double getLatitud() {
 		return latitud;
 	}
 
-	public void setLatitud(long latitud) {
+	public void setLatitud(double latitud) {
 		this.latitud = latitud;
 	}
 
