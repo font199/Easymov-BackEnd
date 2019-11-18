@@ -106,7 +106,7 @@ public class ObstacleService {
 		this.votar(idObstacle, idUsuariVotador, false);
 	}
 	
-	public void votar(int idObstacle, int idUsuariVotador, boolean like) {
+	public void votar(int idObstacle, int idUsuariVotador, boolean esLike) {
 		Optional<Obstacle> obstacleExistent =  obstacleRepo.findById(idObstacle);
 		Optional<Usuari> usuariExistent =  usuariRepo.findById(idUsuariVotador);
 		
@@ -115,7 +115,7 @@ public class ObstacleService {
 			if(usuariExistent.isPresent()) {
 				Usuari usuariVotador = usuariExistent.get();
 				
-				if(like) { // Like a Objecte
+				if(esLike) { // Like a Objecte
 					if(obstacle.getUsuarisLike().indexOf(usuariVotador) == -1) { // si l'usuari no ha votat like anteriorment
 						 //Afegim usuari que ha fet like a la llista de l'obstacle
 						obstacle.getUsuarisLike().add(usuariVotador);
@@ -162,6 +162,52 @@ public class ObstacleService {
 		}else {
 			throw new TaskManagerBussinessException(ExceptionsCodes.OBS_NOT_FOUND, HttpStatus.NOT_FOUND,
 					"obstacle_no_existeix");
+		}
+	}
+
+	public void treureLikeObstacle(int idObstacle, int idUsuariVotador) {
+		this.treureVot(idObstacle, idUsuariVotador, true);
+	}
+
+	public void treureDislikeObstacle(int idObstacle, int idUsuariVotador) {
+		this.treureVot(idObstacle, idUsuariVotador, false);
+	}
+	
+	public void treureVot(int idObstacle, int idUsuariVotador, boolean esLike) {
+		Optional<Obstacle> obstacleExistent =  obstacleRepo.findById(idObstacle);
+		Optional<Usuari> usuariExistent =  usuariRepo.findById(idUsuariVotador);
+		
+		if(obstacleExistent.isPresent()) {
+			Obstacle obstacle = obstacleExistent.get();
+			if(usuariExistent.isPresent()) {
+				Usuari usuariVotador = usuariExistent.get();
+				
+				if(esLike) { // treure Like a Objecte
+					if(obstacle.getUsuarisLike().indexOf(usuariVotador) != -1) { // si l'usuari ha votat like anteriorment
+						obstacle.getUsuarisLike().remove(usuariVotador);
+
+						//Treiem puntuació a l'usuari creador de l'obstacle
+						Optional<Usuari> usuariCreadorE = usuariRepo.findById(obstacle.getIdUsuariCreador());
+						if(usuariCreadorE.isPresent()) {
+							Usuari usuariCreador = usuariCreadorE.get(); 
+							usuariCreador.decrementarPuntuacio(1); // Decrementem 1 PUNT
+							usuariRepo.save(usuariCreador);
+						}
+					}
+				}else { // treure Dislike a Objecte
+					if(obstacle.getUsuarisDislike().indexOf(usuariVotador) != -1) { // si l'usuari ha votat dislike anteriorment
+						obstacle.getUsuarisDislike().remove(usuariVotador);
+
+						//Retornem puntuació a l'usuari creador de l'obstacle
+						Optional<Usuari> usuariCreadorE = usuariRepo.findById(obstacle.getIdUsuariCreador());
+						if(usuariCreadorE.isPresent()) {
+							Usuari usuariCreador = usuariCreadorE.get(); 
+							usuariCreador.incrementarPuntuacio(1); // Incrementem 1 PUNT
+							usuariRepo.save(usuariCreador);
+						}
+					}
+				}
+			}
 		}
 	}
 	

@@ -51,9 +51,19 @@ public class ObstacleController {
 		 obstacleService.likeObstacle(idObstacle, idUsuari);
 	}
 	
+	@PutMapping("/obstacle/{idObstacle}/treurelike/{idUsuari}")
+	public void treureLike(@PathVariable int idObstacle, @PathVariable int idUsuari ) {
+		 obstacleService.treureLikeObstacle(idObstacle, idUsuari);
+	}
+	
 	@PutMapping("/obstacle/{idObstacle}/dislike/{idUsuari}")
 	public void dislike(@PathVariable int idObstacle, @PathVariable int idUsuari) {
 		 obstacleService.dislikeObstacle(idObstacle, idUsuari);
+	}
+	
+	@PutMapping("/obstacle/{idObstacle}/treuredislike/{idUsuari}")
+	public void treureDislike(@PathVariable int idObstacle, @PathVariable int idUsuari) {
+		 obstacleService.treureDislikeObstacle(idObstacle, idUsuari);
 	}
 
 
