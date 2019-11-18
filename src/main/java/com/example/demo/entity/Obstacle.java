@@ -1,9 +1,16 @@
 package com.example.demo.entity;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinTable;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+
 
 @Entity
 public class Obstacle {
@@ -17,6 +24,25 @@ public class Obstacle {
 	private double latitud;
 	private String descripcio;
 	private int idUsuariCreador;
+	
+	@ManyToMany()
+	@JoinTable(name="Obstacles_usuarisLike",
+    joinColumns=@JoinColumn(name="obstacle_id" ),
+    inverseJoinColumns=@JoinColumn(name="usuari_id")) 
+	private List<Usuari> usuarisLike; // llista dels usuaris que han fet like al obstacle.
+	
+	@ManyToMany()
+	@JoinTable(name="Obstacles_usuarisDislike",
+    joinColumns=@JoinColumn(name="obstacle_id" ),
+    inverseJoinColumns=@JoinColumn(name="usuari_id")) 
+	private List<Usuari> usuarisDislike; // llista dels usuaris que hanfet dislike al obstacle. //max 5
+	
+	@ManyToMany()
+	@JoinTable(name="Obstacles_usuarisResolt",
+    joinColumns=@JoinColumn(name="obstacle_id" ),
+    inverseJoinColumns=@JoinColumn(name="usuari_id")) 
+	private List<Usuari> usuarisResolt;  // llista dels usuaris que consideren l'obstacle resolt.
+	
 	
 ////	@JoinColumn(name = "fk_usuari", nullable = false)
 //    @ManyToOne(fetch = FetchType.EAGER, optional = false)
@@ -77,6 +103,32 @@ public class Obstacle {
 	public void setIdUsuariCreador(int idUsuariCreador) {
 		this.idUsuariCreador = idUsuariCreador;
 	}
+
+	public List<Usuari> getUsuarisLike() {
+		return usuarisLike;
+	}
+
+	public void setUsuarisLike(List<Usuari> usuarisLike) {
+		this.usuarisLike = usuarisLike;
+	}
+
+	public List<Usuari> getUsuarisDislike() {
+		return usuarisDislike;
+	}
+
+	public void setUsuarisDislike(List<Usuari> usuarisDislike) {
+		this.usuarisDislike = usuarisDislike;
+	}
+
+	public List<Usuari> getUsuarisResolt() {
+		return usuarisResolt;
+	}
+
+	public void setUsuarisResolt(List<Usuari> usuarisResolt) {
+		this.usuarisResolt = usuarisResolt;
+	}
+
+
 
 
 	

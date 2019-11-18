@@ -75,7 +75,7 @@ public class Usuari {
 
 	public List<Obstacle> getObstacles() {
 		return obstacles;
-	}
+	} 
 
 	public void setObstacles(List<Obstacle> obstacles) {
 		this.obstacles = obstacles;

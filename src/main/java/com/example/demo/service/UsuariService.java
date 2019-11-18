@@ -75,7 +75,7 @@ public class UsuariService {
 		UsuariResDto usuariResDto = new UsuariResDto();
 		Usuari usuari = usuariRepo.getOne(id);
 		try {
-			usuariResDto = usuariDtoConversor.usuariToUsuariDto2(usuari);
+			usuariResDto = usuariDtoConversor.usuariToUsuariResDto(usuari);
 		} catch (EntityNotFoundException ex) {
 			throw new TaskManagerBussinessException(ExceptionsCodes.USE_NOT_FOUND, HttpStatus.NOT_FOUND,
 					"usuari_id_" + id + "_not_found");
@@ -105,29 +105,6 @@ public class UsuariService {
 		}	
 	}
 	
-	public int incrementarPuntuacio(int id, PuntuacioDto puntuacioDto) {
-		Optional<Usuari> usuariExistent =  usuariRepo.findById(id);
-		if(usuariExistent.isPresent()) {
-			Usuari usuari = usuariExistent.get();
-			usuari.incrementarPuntuacio(puntuacioDto.getPuntuacio());
-			usuariRepo.save(usuari);
-			return usuari.getId();
-		}else {
-			throw new TaskManagerBussinessException(ExceptionsCodes.USE_NOT_FOUND, HttpStatus.NOT_FOUND,"usuari_no_existeix");
-		}	
-	}
-	
-	public int decrementarPuntuacio(int id, PuntuacioDto puntuacioDto) {
-		Optional<Usuari> usuariExistent =  usuariRepo.findById(id);
-		if(usuariExistent.isPresent()) {
-			Usuari usuari = usuariExistent.get();
-			usuari.decrementarPuntuacio(puntuacioDto.getPuntuacio());
-			usuariRepo.save(usuari);
-			return usuari.getId();
-		}else {
-			throw new TaskManagerBussinessException(ExceptionsCodes.USE_NOT_FOUND, HttpStatus.NOT_FOUND,"usuari_no_existeix");
-		}	
-	}
 	
 	public List<UsuariRankingDto> ranking(){
 		List<UsuariRankingDto>  listUsuariRankingDto = new ArrayList<UsuariRankingDto>();

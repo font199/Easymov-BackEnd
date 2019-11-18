@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.dto.ObstacleDto;
+import com.example.demo.dto.ObstacleResDto;
 import com.example.demo.service.ObstacleService;
 
 @RestController
@@ -26,7 +27,7 @@ public class ObstacleController {
 	}
 	
 	@GetMapping("/obstacle/{id}")
-	public ObstacleDto GetObstacle(@PathVariable int id) {
+	public ObstacleResDto GetObstacle(@PathVariable int id) {
 		return obstacleService.getObstacle(id);
 	}
 
@@ -45,6 +46,15 @@ public class ObstacleController {
 		 obstacleService.eliminar(id);
 	}
 	
-	// Mirar si el 5e bot negatiu no te mes de 5 bots positius, llavors eliminem el obstacle.
-	// Poder fer un push de el nombre de negatius que cal tenir per eliminar el obstacle
+	@PutMapping("/obstacle/{idObstacle}/like/{idUsuari}")
+	public void like(@PathVariable int idObstacle, @PathVariable int idUsuari ) {
+		 obstacleService.likeObstacle(idObstacle, idUsuari);
+	}
+	
+	@PutMapping("/obstacle/{idObstacle}/dislike/{idUsuari}")
+	public void dislike(@PathVariable int idObstacle, @PathVariable int idUsuari) {
+		 obstacleService.dislikeObstacle(idObstacle, idUsuari);
+	}
+
+
 }

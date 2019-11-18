@@ -36,7 +36,7 @@ public class UsuariDtoConversor {
 		
 	}
 	
-	public UsuariResDto usuariToUsuariDto2(Usuari usuari) {
+	public UsuariResDto usuariToUsuariResDto(Usuari usuari) {
 		UsuariResDto usuariResDto = new UsuariResDto();
 		
 		usuariResDto.setId(usuari.getId());
