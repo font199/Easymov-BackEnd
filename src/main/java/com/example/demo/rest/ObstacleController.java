@@ -44,4 +44,7 @@ public class ObstacleController {
 	public void eliminar(@PathVariable int id) {
 		 obstacleService.eliminar(id);
 	}
+	
+	// Mirar si el 5e bot negatiu no te mes de 5 bots positius, llavors eliminem el obstacle.
+	// Poder fer un push de el nombre de negatius que cal tenir per eliminar el obstacle
 }
