@@ -11,8 +11,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.example.demo.dto.PuntuacioDto;
 import com.example.demo.dto.UsuariDto;
 import com.example.demo.dto.UsuariDtoConversor;
+import com.example.demo.dto.UsuariRankingDto;
 import com.example.demo.dto.UsuariResDto;
 import com.example.demo.entity.Usuari;
 import com.example.demo.exceptions.TaskManagerBussinessException;
@@ -36,7 +38,10 @@ public class UsuariService {
 		
 	 	if(usuariExistent.isPresent()) { // si l'usuari existeix, retornem la seva id
     		return usuariExistent.get().getId();
-    	} else { // si l'usuari no existeix el crearem i retornem la seva id
+    	} else {
+    		//inicialitzem la puntuacio a 0
+    		usuari.setPuntuacio(0);
+    		// si l'usuari no existeix el crearem i retornem la seva id
     		Usuari usuariCreat = usuariRepo.save(usuari);
     		return usuariCreat.getId();
     	}
@@ -70,7 +75,7 @@ public class UsuariService {
 		UsuariResDto usuariResDto = new UsuariResDto();
 		Usuari usuari = usuariRepo.getOne(id);
 		try {
-			usuariResDto = usuariDtoConversor.usuariToUsuariDto2(usuari);
+			usuariResDto = usuariDtoConversor.usuariToUsuariResDto(usuari);
 		} catch (EntityNotFoundException ex) {
 			throw new TaskManagerBussinessException(ExceptionsCodes.USE_NOT_FOUND, HttpStatus.NOT_FOUND,
 					"usuari_id_" + id + "_not_found");
@@ -87,7 +92,24 @@ public class UsuariService {
 					"usuari_id_" + id + "_empty_result");
 		}
 	}
+
+	public int puntuar(int id, PuntuacioDto puntuacioDto) {
+		Optional<Usuari> usuariExistent =  usuariRepo.findById(id);
+		if(usuariExistent.isPresent()) {
+			Usuari usuari = usuariExistent.get();
+			usuari.setPuntuacio(puntuacioDto.getPuntuacio());
+			usuariRepo.save(usuari);
+			return usuari.getId();
+		}else {
+			throw new TaskManagerBussinessException(ExceptionsCodes.USE_NOT_FOUND, HttpStatus.NOT_FOUND,"usuari_no_existeix");
+		}	
+	}
 	
 	
-	
+	public List<UsuariRankingDto> ranking(){
+		List<UsuariRankingDto>  listUsuariRankingDto = new ArrayList<UsuariRankingDto>();
+		usuariRepo.findTop10ByOrderByPuntuacioDesc().stream().map(usuariDtoConversor::usuariToUsuariRankingDto).forEach(listUsuariRankingDto ::add);
+		return listUsuariRankingDto;
+	}
+
 }

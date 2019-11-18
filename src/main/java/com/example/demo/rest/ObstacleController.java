@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.dto.ObstacleDto;
+import com.example.demo.dto.ObstacleResDto;
 import com.example.demo.service.ObstacleService;
 
 @RestController
@@ -26,7 +27,7 @@ public class ObstacleController {
 	}
 	
 	@GetMapping("/obstacle/{id}")
-	public ObstacleDto GetObstacle(@PathVariable int id) {
+	public ObstacleResDto GetObstacle(@PathVariable int id) {
 		return obstacleService.getObstacle(id);
 	}
 
@@ -44,4 +45,16 @@ public class ObstacleController {
 	public void eliminar(@PathVariable int id) {
 		 obstacleService.eliminar(id);
 	}
+	
+	@PutMapping("/obstacle/{idObstacle}/like/{idUsuari}")
+	public void like(@PathVariable int idObstacle, @PathVariable int idUsuari ) {
+		 obstacleService.likeObstacle(idObstacle, idUsuari);
+	}
+	
+	@PutMapping("/obstacle/{idObstacle}/dislike/{idUsuari}")
+	public void dislike(@PathVariable int idObstacle, @PathVariable int idUsuari) {
+		 obstacleService.dislikeObstacle(idObstacle, idUsuari);
+	}
+
+
 }

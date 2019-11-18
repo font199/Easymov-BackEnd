@@ -1,5 +1,6 @@
 package com.example.demo.repository;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -11,5 +12,7 @@ import com.example.demo.entity.Usuari;
 public interface UsuariRepo extends JpaRepository <Usuari, Integer>{
 	
 	 Optional<Usuari> findByIdGoogle(String idGoogle);
+	 
+	 List<Usuari> findTop10ByOrderByPuntuacioDesc();
 
 }

@@ -17,6 +17,7 @@ public class UsuariDtoConversor {
 		usuari.setNom(usuariDto.getNom());
 		usuari.setMail(usuariDto.getMail());
 		usuari.setFotoURL(usuariDto.getFotoURL());
+		usuari.setPuntuacio(usuariDto.getPuntuacio());
 		
 		return usuari;
 	}
@@ -29,12 +30,13 @@ public class UsuariDtoConversor {
 		usuariDto.setIdGoogle(usuari.getIdGoogle());
 		usuariDto.setMail(usuari.getMail());
 		usuariDto.setFotoURL(usuari.getFotoURL());
+		usuariDto.setPuntuacio(usuari.getPuntuacio());
 		
 		return usuariDto;
 		
 	}
 	
-	public UsuariResDto usuariToUsuariDto2(Usuari usuari) {
+	public UsuariResDto usuariToUsuariResDto(Usuari usuari) {
 		UsuariResDto usuariResDto = new UsuariResDto();
 		
 		usuariResDto.setId(usuari.getId());
@@ -42,6 +44,7 @@ public class UsuariDtoConversor {
 		usuariResDto.setIdGoogle(usuari.getIdGoogle());
 		usuariResDto.setMail(usuari.getMail());
 		usuariResDto.setFotoURL(usuari.getFotoURL());
+		usuariResDto.setPuntuacio(usuari.getPuntuacio());
 		usuariResDto.getObstaclesIds().clear(); 
 		if(usuari.getObstacles() != null) {
 			for (Obstacle o : usuari.getObstacles()) {
@@ -52,4 +55,13 @@ public class UsuariDtoConversor {
 		
 	}
 
+	public UsuariRankingDto usuariToUsuariRankingDto(Usuari usuari) {
+		UsuariRankingDto uRankingDto = new UsuariRankingDto();
+		
+		uRankingDto.setId(usuari.getId());
+		uRankingDto.setNom(usuari.getNom());
+		uRankingDto.setPuntuacio(usuari.getPuntuacio());
+		
+		return uRankingDto;
+	}
 }

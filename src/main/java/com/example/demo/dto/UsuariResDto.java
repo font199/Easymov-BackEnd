@@ -24,6 +24,7 @@ public class UsuariResDto implements Serializable {
 	private String idGoogle;
 	@NotNull
 	private String mail;
+	private int puntuacio;
 	
 	private List<Integer> obstaclesIds = new ArrayList<>();
 
@@ -73,6 +74,14 @@ public class UsuariResDto implements Serializable {
 
 	public void setObstaclesIds(List<Integer> obstaclesIds) {
 		this.obstaclesIds = obstaclesIds;
+	}
+
+	public int getPuntuacio() {
+		return puntuacio;
+	}
+
+	public void setPuntuacio(int puntuacio) {
+		this.puntuacio = puntuacio;
 	}
 
 

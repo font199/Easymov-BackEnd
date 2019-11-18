@@ -10,6 +10,7 @@ public interface ExceptionsCodes {
 	final String OBS_NOT_FOUND = "EMOBS01";
 	final String OBS_DUPLICATE = "EMOBS02";
 	final String OBS_EMPTY_RESULT = "EMOBS03";
+	final String OBS_ALREADY_VOTED ="EMOBS04";
 
 	
 	//RESET TOKEN

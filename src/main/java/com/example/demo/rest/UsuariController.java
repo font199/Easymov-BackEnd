@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.demo.dto.PuntuacioDto;
 import com.example.demo.dto.UsuariDto;
+import com.example.demo.dto.UsuariRankingDto;
 import com.example.demo.dto.UsuariResDto;
 import com.example.demo.service.UsuariService;
 
@@ -45,8 +47,17 @@ public class UsuariController {
 	@DeleteMapping("/usuari/{id}")
 	public void eliminar(@PathVariable int id) {
 		usuariService.eliminar(id);
-		
+		}
+	
+	@PutMapping("/puntuar/{id}")
+	public int puntuarUsuari(@PathVariable int id, @RequestBody PuntuacioDto puntuacioDto) {
+		return usuariService.puntuar(id, puntuacioDto);
+	}
+
+	
+	@GetMapping("/ranking")
+	public List<UsuariRankingDto> ranking() {
+		return usuariService.ranking();
 	}
 	
-
 }

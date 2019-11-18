@@ -1,8 +1,6 @@
 package com.example.demo.dto;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.validation.constraints.NotNull;
 
@@ -24,6 +22,7 @@ public class UsuariDto implements Serializable {
 	private String idGoogle;
 	@NotNull
 	private String mail;
+	private int puntuacio;
 
 	public String getNom() {
 		return nom;
@@ -63,6 +62,14 @@ public class UsuariDto implements Serializable {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	public int getPuntuacio() {
+		return puntuacio;
+	}
+
+	public void setPuntuacio(int puntuacio) {
+		this.puntuacio = puntuacio;
 	}
 
 
