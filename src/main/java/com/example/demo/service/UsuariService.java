@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.example.demo.dto.PuntuacioDto;
 import com.example.demo.dto.UsuariDto;
 import com.example.demo.dto.UsuariDtoConversor;
+import com.example.demo.dto.UsuariRankingDto;
 import com.example.demo.dto.UsuariResDto;
 import com.example.demo.entity.Usuari;
 import com.example.demo.exceptions.TaskManagerBussinessException;
@@ -128,10 +129,10 @@ public class UsuariService {
 		}	
 	}
 	
-	public List<UsuariDto> ranking(){
-		List<UsuariDto>  listUsuarisDto = new ArrayList<UsuariDto>();
-		usuariRepo.findAll().stream().map(usuariDtoConversor::usuariToUsuariDto).forEach(listUsuarisDto ::add);
-		return listUsuarisDto;
+	public List<UsuariRankingDto> ranking(){
+		List<UsuariRankingDto>  listUsuariRankingDto = new ArrayList<UsuariRankingDto>();
+		usuariRepo.findTop10ByOrderByPuntuacioDesc().stream().map(usuariDtoConversor::usuariToUsuariRankingDto).forEach(listUsuariRankingDto ::add);
+		return listUsuariRankingDto;
 	}
 
 }

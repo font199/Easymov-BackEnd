@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.dto.PuntuacioDto;
 import com.example.demo.dto.UsuariDto;
+import com.example.demo.dto.UsuariRankingDto;
 import com.example.demo.dto.UsuariResDto;
 import com.example.demo.service.UsuariService;
 
@@ -48,26 +49,15 @@ public class UsuariController {
 		usuariService.eliminar(id);
 		}
 	
-	@PutMapping("puntuar/{id}")
+	@PutMapping("/puntuar/{id}")
 	public int puntuarUsuari(@PathVariable int id, @RequestBody PuntuacioDto puntuacioDto) {
 		return usuariService.puntuar(id, puntuacioDto);
 	}
-	
-	@PutMapping("like/{id}")
-	public int incrementarPuntuacio(@PathVariable int id, @RequestBody PuntuacioDto puntuacioDto) {
-		return usuariService.incrementarPuntuacio(id, puntuacioDto);
-	}
-	
-	@PutMapping("dislike/{id}")
-	public int decrementarPuntuacio(@PathVariable int id, @RequestBody PuntuacioDto puntuacioDto) {
-		return usuariService.decrementarPuntuacio(id, puntuacioDto);
 
-	}
 	
 	@GetMapping("/ranking")
-	//falta implentar el sort
-	public List<UsuariDto> ranking() {
-		return usuariService.llistar();
+	public List<UsuariRankingDto> ranking() {
+		return usuariService.ranking();
 	}
 	
 }

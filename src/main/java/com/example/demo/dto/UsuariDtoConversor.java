@@ -44,6 +44,7 @@ public class UsuariDtoConversor {
 		usuariResDto.setIdGoogle(usuari.getIdGoogle());
 		usuariResDto.setMail(usuari.getMail());
 		usuariResDto.setFotoURL(usuari.getFotoURL());
+		usuariResDto.setPuntuacio(usuari.getPuntuacio());
 		usuariResDto.getObstaclesIds().clear(); 
 		if(usuari.getObstacles() != null) {
 			for (Obstacle o : usuari.getObstacles()) {
@@ -54,4 +55,13 @@ public class UsuariDtoConversor {
 		
 	}
 
+	public UsuariRankingDto usuariToUsuariRankingDto(Usuari usuari) {
+		UsuariRankingDto uRankingDto = new UsuariRankingDto();
+		
+		uRankingDto.setId(usuari.getId());
+		uRankingDto.setNom(usuari.getNom());
+		uRankingDto.setPuntuacio(usuari.getPuntuacio());
+		
+		return uRankingDto;
+	}
 }
