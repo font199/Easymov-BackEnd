@@ -73,7 +73,6 @@ public class Usuari {
 		this.mail = mail;
 	}
 
-
 	public List<Obstacle> getObstacles() {
 		return obstacles;
 	}
@@ -81,7 +80,7 @@ public class Usuari {
 	public void setObstacles(List<Obstacle> obstacles) {
 		this.obstacles = obstacles;
 	}
-		
+
 	public int getPuntuacio() {
 		return puntuacio;
 	}

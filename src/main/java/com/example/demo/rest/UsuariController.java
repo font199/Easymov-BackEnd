@@ -61,8 +61,8 @@ public class UsuariController {
 	@PutMapping("dislike/{id}")
 	public int decrementarPuntuacio(@PathVariable int id, @RequestBody PuntuacioDto puntuacioDto) {
 		return usuariService.decrementarPuntuacio(id, puntuacioDto);
+
 	}
-	
 	
 	@GetMapping("/ranking")
 	//falta implentar el sort
@@ -70,5 +70,4 @@ public class UsuariController {
 		return usuariService.llistar();
 	}
 	
-
 }
