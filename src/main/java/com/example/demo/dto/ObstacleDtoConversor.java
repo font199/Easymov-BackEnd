@@ -16,6 +16,7 @@ public class ObstacleDtoConversor {
 		obstacle.setNom(obstacleDto.getNom());
 		obstacle.setDescripcio(obstacleDto.getDescripcio());
 	    obstacle.setIdUsuariCreador(obstacleDto.getIdUsuariCreador());
+	    obstacle.setFotoUrl(obstacleDto.getFoto());
 		return obstacle;
 	}
 	
@@ -28,6 +29,7 @@ public class ObstacleDtoConversor {
 		obstacleDto.setNom(obstacle.getNom());
 		obstacleDto.setDescripcio(obstacle.getDescripcio());
 		obstacleDto.setIdUsuariCreador(obstacle.getIdUsuariCreador());
+		obstacleDto.setFoto(obstacle.getFotoUrl());
 		
 		return obstacleDto;
 	}
