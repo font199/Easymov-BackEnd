@@ -128,6 +128,13 @@ public class Obstacle {
 		this.usuarisResolt = usuarisResolt;
 	}
 
+	public boolean checkNumberDislike() {
+		int likes = this.usuarisLike.size();
+		int dislikes = this.usuarisDislike.size();
+		if(likes - dislikes < -2)return true;
+		return false;
+	}
+
 
 
 

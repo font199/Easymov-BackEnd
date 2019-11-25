@@ -104,6 +104,7 @@ public class ObstacleService {
 
 	public void dislikeObstacle(int idObstacle, int idUsuariVotador) {
 		this.votar(idObstacle, idUsuariVotador, false);
+		
 	}
 	
 	public void votar(int idObstacle, int idUsuariVotador, boolean esLike) {
@@ -142,6 +143,10 @@ public class ObstacleService {
 						//treiem vot de like si en te
 						if(obstacle.getUsuarisLike().indexOf(usuariVotador) != -1) {
 							obstacle.getUsuarisLike().remove(obstacle.getUsuarisLike().indexOf(usuariVotador));
+						}
+						if(obstacle.checkNumberDislike()) {
+							//si el vot té molts dislikes el borrem
+							this.eliminar(idObstacle);
 						}
 						
 						//Decrementem puntuació a l'usuari creador de l'obstacle
