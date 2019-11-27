@@ -211,14 +211,10 @@ public class ObstacleService {
 		}
 	}
 	
-	// - unvote de like i dislike
-	// - Eliminar obstacle si s'ha votat 5 cops malament
-	// - Votar i unvote de Resolved
-	// Inserts de H2
-	// Tutorial de puntuacio
+
 	
+
 	
-	// CONFIG : Poder fer un push de el nombre de negatius que cal tenir per eliminar el obstacle
 	
 	
 }
