@@ -41,6 +41,7 @@ public class ObstacleDtoConversor {
 		obstacleResDto.setLongitud(obstacle.getLongitud());
 		obstacleResDto.setLatitud(obstacle.getLatitud());
 		obstacleResDto.setNom(obstacle.getNom());
+		obstacleResDto.setFoto(obstacle.getFotoUrl());
 		obstacleResDto.setDescripcio(obstacle.getDescripcio());
 		obstacleResDto.setIdUsuariCreador(obstacle.getIdUsuariCreador());
 		obstacleResDto.getUsuarisLike().clear();
