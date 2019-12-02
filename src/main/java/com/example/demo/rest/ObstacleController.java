@@ -65,6 +65,16 @@ public class ObstacleController {
 	public void treureDislike(@PathVariable int idObstacle, @PathVariable int idUsuari) {
 		 obstacleService.treureDislikeObstacle(idObstacle, idUsuari);
 	}
+	
+	@PutMapping("/obstacle/{idObstacle}/solucionar/{idUsuari}")
+	public void solucionar(@PathVariable int idObstacle, @PathVariable int idUsuari ) {
+		 obstacleService.solucionarObstacle(idObstacle, idUsuari);
+	}
+	
+	@PutMapping("/obstacle/{idObstacle}/truresolucionar/{idUsuari}")
+	public void truereSolucionar(@PathVariable int idObstacle, @PathVariable int idUsuari ) {
+		 obstacleService.treureSsolucionarObstacle(idObstacle, idUsuari);
+	}
 
 
 }
