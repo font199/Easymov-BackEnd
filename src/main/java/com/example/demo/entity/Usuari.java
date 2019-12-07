@@ -2,6 +2,7 @@ package com.example.demo.entity;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -28,7 +29,7 @@ public class Usuari {
 	@NotNull
 	private String mail;
 	
-	@OneToMany(mappedBy = "idUsuariCreador")
+	@OneToMany(mappedBy = "idUsuariCreador", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Obstacle> obstacles;
 	
 	private int puntuacio;
