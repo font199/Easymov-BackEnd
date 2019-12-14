@@ -29,7 +29,8 @@ public class Usuari {
 	@NotNull
 	private String mail;
 	
-	@OneToMany(mappedBy = "idUsuariCreador", cascade = CascadeType.ALL, orphanRemoval = true)
+//	@OneToMany(mappedBy = "idUsuariCreador", cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(mappedBy = "idUsuariCreador")
 	private List<Obstacle> obstacles;
 	
 	private int puntuacio;
