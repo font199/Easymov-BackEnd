@@ -85,26 +85,26 @@ public class UsuariService {
 	}
  
 	public void eliminar(int id) {
+		if(id == 1) { // No es pot eliminar l'usuari system
+			throw new TaskManagerBussinessException(ExceptionsCodes.USE_SYSTEM_NOT_VALID, HttpStatus.FORBIDDEN,
+					"usuari_id_" + id + "_is_system_user");
+		}
+		
 		Optional<Usuari> usuariExistent =  usuariRepo.findById(id);
 		if(usuariExistent.isPresent()) {
 			//Si te obstacles els asignarem a l'usuari del Sistema
 			List<Obstacle> obstacles = usuariExistent.get().getObstacles();
-			if(obstacles != null) {
+			if(!obstacles.isEmpty()) {
 				
 				//Mirem si existeix l'usuari System i sino el crearem
-				Optional<Usuari> systemExistent =  usuariRepo.findById(1000);
+				Optional<Usuari> systemExistent =  usuariRepo.findById(1);
 				if(!systemExistent.isPresent()) {
-					Usuari system = new Usuari();
-					system.setIdGoogle("ddddd");
-					system.setNom("System");
-					system.setId(1000);
-					system.setMail("bbbb");
-					Usuari userCreat = usuariRepo.save(system);
-					userCreat.setId(1000);
+					throw new TaskManagerBussinessException(ExceptionsCodes.USE_EMPTY_RESULT, HttpStatus.NOT_FOUND,
+							"usuari_id_" + 1 + "_empty_result");
 				}
 				//Recorrem els obstacles de l'usuari a borrar i l'hi asginem el user System
 				obstacles.forEach((obs) -> {
-					obs.setIdUsuariCreador(1000); 
+					obs.setIdUsuariCreador(1); 
 				});
 			}
 			usuariExistent.get().setObstacles(null);

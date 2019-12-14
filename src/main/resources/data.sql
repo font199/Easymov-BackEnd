@@ -1,5 +1,8 @@
+INSERT INTO USUARI (id,ID_GOOGLE, mail, nom, puntuacio)
+values (1, 'ssss', 'sss@sss.com', 'System', 0);
+
 INSERT INTO USUARI (id, fotourl ,ID_GOOGLE, mail, nom, puntuacio)
-values (100, 'www.dsfgdsfg0.com', 'a1111', 'ssdf@sdf.com', 'Jordi', 10);
+values (100, 'www.dsfgdsfg0.com', 'a1111', 'ssdf@sdf.com', 'Pau', 10);
 
 INSERT INTO USUARI (id, fotourl ,ID_GOOGLE, mail, nom, puntuacio)
 values (101, 'www.dsfgdsfg1.com', 'a2222', 'ssd2f@sdf.com', 'Laia', 10);

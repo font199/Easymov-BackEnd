@@ -4,6 +4,7 @@ public interface ExceptionsCodes {
 	//USUARIS
 	final String USE_NOT_FOUND = "EMUSE01";
 	final String USE_EMPTY_RESULT = "EMUSE02";
+	final String USE_SYSTEM_NOT_VALID = "EMUSE03";
 	
 	//OBSTACLES
 
