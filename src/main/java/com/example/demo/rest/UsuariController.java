@@ -19,7 +19,7 @@ import com.example.demo.service.UsuariService;
 
 @RestController
 public class UsuariController {
-	
+
 	@Autowired
 	private UsuariService usuariService;
 
@@ -27,7 +27,7 @@ public class UsuariController {
 	public List<UsuariDto> llistar() {
 		return usuariService.llistar();
 	}
-	
+
 	@GetMapping("/usuari/{id}")
 	public UsuariResDto buscar(@PathVariable int id) {
 		return usuariService.buscar(id);
@@ -41,23 +41,21 @@ public class UsuariController {
 	@PutMapping("/usuari/{id}")
 	public int modificar(@PathVariable int id, @RequestBody UsuariDto usuariDto) {
 		return usuariService.modificar(id, usuariDto);
-	
 	}
 
 	@DeleteMapping("/usuari/{id}")
 	public void eliminar(@PathVariable int id) {
 		usuariService.eliminar(id);
-		}
-	
+	}
+
 	@PutMapping("/puntuar/{id}")
 	public int puntuarUsuari(@PathVariable int id, @RequestBody PuntuacioDto puntuacioDto) {
 		return usuariService.puntuar(id, puntuacioDto);
 	}
 
-	
 	@GetMapping("/ranking")
 	public List<UsuariRankingDto> ranking() {
 		return usuariService.ranking();
 	}
-	
+
 }

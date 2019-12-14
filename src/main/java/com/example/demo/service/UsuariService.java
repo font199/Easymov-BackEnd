@@ -16,6 +16,7 @@ import com.example.demo.dto.UsuariDto;
 import com.example.demo.dto.UsuariDtoConversor;
 import com.example.demo.dto.UsuariRankingDto;
 import com.example.demo.dto.UsuariResDto;
+import com.example.demo.entity.Obstacle;
 import com.example.demo.entity.Usuari;
 import com.example.demo.exceptions.TaskManagerBussinessException;
 import com.example.demo.exceptions.codes.ExceptionsCodes;
@@ -86,7 +87,22 @@ public class UsuariService {
 	public void eliminar(int id) {
 		Optional<Usuari> usuariExistent =  usuariRepo.findById(id);
 		if(usuariExistent.isPresent()) {
-			usuariRepo.deleteById(id);
+			//Si te obstacles els asignarem a l'usuari del Sistema
+			List<Obstacle> obstacles = usuariExistent.get().getObstacles();
+			if(obstacles != null) {
+				//Mirem si existeix l'usuari System per asignarli els obastacles del usuari a borrar
+				Optional<Usuari> systemExistent =  usuariRepo.findById(1000);
+				if(systemExistent.isPresent()) {
+					obstacles.forEach((obs) -> {
+						obs.setIdUsuariCreador(1000); // id usuari del Sistema
+					});
+				}else{
+					throw new TaskManagerBussinessException(ExceptionsCodes.USE_EMPTY_RESULT, HttpStatus.NOT_FOUND,
+							"usuari_id_" + 1000 + "_empty_result");
+				}
+			}
+			
+			usuariRepo.deleteById(id); 
 		} else {
 			throw new TaskManagerBussinessException(ExceptionsCodes.USE_EMPTY_RESULT, HttpStatus.NOT_FOUND,
 					"usuari_id_" + id + "_empty_result");
