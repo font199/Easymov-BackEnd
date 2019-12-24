@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.dto.PuntuacioDto;
+import com.example.demo.dto.TokenResDto;
 import com.example.demo.dto.UsuariDto;
 import com.example.demo.dto.UsuariRankingDto;
 import com.example.demo.dto.UsuariResDto;
@@ -23,37 +24,37 @@ public class UsuariController {
 	@Autowired
 	private UsuariService usuariService;
 
-	@GetMapping("/usuaris")
+	@GetMapping("/rest/usuaris")
 	public List<UsuariDto> llistar() {
 		return usuariService.llistar();
 	}
 
-	@GetMapping("/usuari/{id}")
+	@GetMapping("/rest/usuari/{id}")
 	public UsuariResDto buscar(@PathVariable int id) {
 		return usuariService.buscar(id);
 	}
 
 	@PostMapping("/usuari")
-	public int insertar(@RequestBody UsuariDto usuariDto) {
+	public TokenResDto insertar(@RequestBody UsuariDto usuariDto) {
 		return usuariService.registrar(usuariDto);
 	}
 
-	@PutMapping("/usuari/{id}")
+	@PutMapping("/rest/usuari/{id}")
 	public int modificar(@PathVariable int id, @RequestBody UsuariDto usuariDto) {
 		return usuariService.modificar(id, usuariDto);
 	}
 
-	@DeleteMapping("/usuari/{id}")
+	@DeleteMapping("/rest/usuari/{id}")
 	public void eliminar(@PathVariable int id) {
 		usuariService.eliminar(id);
 	}
 
-	@PutMapping("/puntuar/{id}")
+	@PutMapping("/rest/puntuar/{id}")
 	public int puntuarUsuari(@PathVariable int id, @RequestBody PuntuacioDto puntuacioDto) {
 		return usuariService.puntuar(id, puntuacioDto);
 	}
 
-	@GetMapping("/ranking")
+	@GetMapping("/rest/ranking")
 	public List<UsuariRankingDto> ranking() {
 		return usuariService.ranking();
 	}

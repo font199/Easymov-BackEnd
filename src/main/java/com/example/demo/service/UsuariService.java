@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.example.demo.dto.PuntuacioDto;
+import com.example.demo.dto.TokenResDto;
 import com.example.demo.dto.UsuariDto;
 import com.example.demo.dto.UsuariDtoConversor;
 import com.example.demo.dto.UsuariRankingDto;
@@ -21,31 +22,40 @@ import com.example.demo.entity.Usuari;
 import com.example.demo.exceptions.TaskManagerBussinessException;
 import com.example.demo.exceptions.codes.ExceptionsCodes;
 import com.example.demo.repository.UsuariRepo;
+import com.example.demo.security.JwtGenerator;
 
 @Service
 public class UsuariService {
 
+	@Autowired
+	private JwtGenerator jwtGenerator;
+	
     @Autowired
     private UsuariRepo usuariRepo;
     
     @Autowired
     private UsuariDtoConversor usuariDtoConversor;
+    
+    
 	
     @Transactional
-	public int registrar(UsuariDto usuariDto) {
-		
+	public TokenResDto registrar(UsuariDto usuariDto) {
+    	TokenResDto tokenResDto = new TokenResDto();
 		 Optional<Usuari> usuariExistent =  usuariRepo.findByIdGoogle(usuariDto.getIdGoogle());
 		 Usuari usuari = usuariDtoConversor.usuariDtoToUsuari(usuariDto);
 		
-	 	if(usuariExistent.isPresent()) { // si l'usuari existeix, retornem la seva id
-    		return usuariExistent.get().getId();
+	 	if(usuariExistent.isPresent()) { // si l'usuari existeix, retornem la seva id i el token
+	 		tokenResDto.setId(usuariExistent.get().getId());
+	 		tokenResDto.setToken(jwtGenerator.generate(usuariExistent.get()));
     	} else {
     		//inicialitzem la puntuacio a 0
     		usuari.setPuntuacio(0);
-    		// si l'usuari no existeix el crearem i retornem la seva id
+    		// si l'usuari no existeix el crearem i retornem la seva id i el token
     		Usuari usuariCreat = usuariRepo.save(usuari);
-    		return usuariCreat.getId();
+    		tokenResDto.setId(usuariCreat.getId());
+    		tokenResDto.setToken(jwtGenerator.generate(usuariCreat)); 
     	}
+	 	return tokenResDto;
 	}
 	
 	@Transactional
