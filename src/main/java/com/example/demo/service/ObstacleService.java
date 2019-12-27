@@ -51,7 +51,7 @@ public class ObstacleService {
 		return obstacleResDto;
 	}
 
-	public int insertar(ObstacleDto obstacleDto) {;
+	public int insertar(ObstacleDto obstacleDto) {
 		Optional<Obstacle> obstacleExistent =  obstacleRepo.findByLongitudAndLatitud(obstacleDto.getLongitud(), obstacleDto.getLatitud());
 		Obstacle obtacle = obstacleDtoConversor.obstacleDtoToObstacle(obstacleDto);
 		
@@ -227,6 +227,7 @@ public class ObstacleService {
 				if(obstacle.getUsuarisResolt().indexOf(usuariVotador) == -1) { // si l'usuari no ha votat solucioat anteriorment
 					 //Afegim usuari que ha fet like a la llista de l'obstacle
 					obstacle.getUsuarisResolt().add(usuariVotador);
+					obstacleRepo.save(obstacle);
 				}else {
 					throw new TaskManagerBussinessException(ExceptionsCodes.OBS_ALREADY_VOTED, HttpStatus.NOT_FOUND,"usuari ja ha solucionat l'obstacle");
 				}
@@ -249,6 +250,7 @@ public class ObstacleService {
 				Usuari usuariVotador = usuariExistent.get();
 				if(obstacle.getUsuarisResolt().indexOf(usuariVotador) != -1) { // si l'usuari ha votat result anteriorment
 					obstacle.getUsuarisResolt().remove(usuariVotador);
+					obstacleRepo.save(obstacle);
 				}
 			}else {
 				throw new TaskManagerBussinessException(ExceptionsCodes.USE_NOT_FOUND, HttpStatus.NOT_FOUND,"usuari_no_existeix");
