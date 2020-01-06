@@ -1,5 +1,7 @@
 package com.example.demo.controllerTest;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.mock;
 
 import java.util.List;
@@ -7,6 +9,7 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,11 +18,15 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.RequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
 import com.example.demo.dto.PuntuacioDto;
 import com.example.demo.dto.TokenResDto;
@@ -107,7 +114,7 @@ public class UsuariControllerTest {
 	*/
 	
 	@Test
-	public void getUsuariconcretTest() throws Exception{
+	public void getUsuariconcretTest()  throws Exception{
 		entityManager.persist(usuariDto);
 		entityManager.flush();
 		
@@ -122,9 +129,22 @@ public class UsuariControllerTest {
 		JSONAssert.assertEquals(expected,result.getResponse().getContentAsString(),false);
 
 	}
+
 	@Test
 	public void puntuarUsuariconcretTest() throws Exception{
 		
+		  MockHttpServletRequest request = new MockHttpServletRequest();
+	        RequestContextHolder.setRequestAttributes(new ServletRequestAttributes(request));
+	         
+	        Mockito.when(usuariService.puntuar(uDto.getId(),puntuacioDto )).thenReturn(puntuacioDto.getPuntuacio());
+			
+	         
+	        int responseEntity = usuariService.puntuar(uDto.getId(), puntuacioDto);
+	         
+	        assertThat(responseEntity).isEqualTo(uDto.getId());
+	    }
+		
+		/*
 		Mockito.when(
 				usuariService.puntuar(uDto.getId(),puntuacioDto )).thenReturn(puntuacioDto.getPuntuacio());
 		
@@ -133,8 +153,22 @@ public class UsuariControllerTest {
 		
 		MvcResult result = mockMvc.perform(requestBuilder).andReturn();
 		JSONAssert.assertEquals("10",result.getResponse().getContentAsString(),false);
+		*/
+	/*
+	@Test
+	public void getRankingUsuariTest()  throws Exception{
+		Mockito.when(
+				usuariService.ranking()).thenReturn(Mockito.anyList());
+		
+		RequestBuilder requestBuilder = MockMvcRequestBuilders.put(
+				"/rest/ranking").accept(MediaType.APPLICATION_JSON);
+		
+		JSONAssert.assertEquals("10",result.getResponse().getContentAsString(),false);
+		assertThat(
+		assertThat(responseEntity.getStatusCodeValue()).isEqualTo(201);
+		
 	}
-	
+	*/
 
 
 }
