@@ -1,6 +1,5 @@
 package com.example.demo.controllerTest;
 
-import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
 
 import java.util.List;
@@ -12,9 +11,8 @@ import org.mockito.Mockito;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -22,24 +20,22 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.RequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.web.bind.annotation.GetMapping;
 
 import com.example.demo.dto.PuntuacioDto;
 import com.example.demo.dto.TokenResDto;
 import com.example.demo.dto.UsuariDto;
 import com.example.demo.dto.UsuariResDto;
 import com.example.demo.entity.Obstacle;
-import com.example.demo.entity.Usuari;
 import com.example.demo.rest.UsuariController;
 import com.example.demo.service.UsuariService;
 
 @RunWith(SpringRunner.class)
 @WebMvcTest(value = UsuariController.class, secure = false)
-@DataJpaTest
 public class UsuariControllerTest {
 	
 	@Autowired
 	private MockMvc mockMvc;
+	private TestEntityManager entityManager;
 	
 	@MockBean
 	private UsuariService usuariService;
@@ -60,17 +56,23 @@ public class UsuariControllerTest {
 		obs.setFotoUrl("www.foto.com");
 		obs.setIdUsuariCreador(101);
 		
-		uDto = new UsuariDto();
-		uDto.setId(1);
-		uDto.setNom("test");
-		uDto.setMail("testmail");
-		uDto.setFotoURL("");
-		uDto.setIdGoogle("");
-		uDto.setPuntuacio(0);
+		usuariDto = new UsuariResDto();
+		usuariDto.setId(1);
+		usuariDto.setNom("test");
+		usuariDto.setMail("testmail");
+		usuariDto.setFotoURL("");
+		usuariDto.setIdGoogle("");
+		usuariDto.setPuntuacio(0);
 		
-		tokenResDto = mock(TokenResDto.class);
-		usuariDto = mock(UsuariResDto.class);
+		tokenResDto = new TokenResDto();
+		tokenResDto.setId(1);
+		tokenResDto.setToken("token")
+		;
+		 puntuacioDto = new PuntuacioDto();
 		puntuacioDto.setPuntuacio(10);
+		//tokenResDto = mock(TokenResDto.class);
+		//usuariDto = mock(UsuariResDto.class);
+		//puntuacioDto.setPuntuacio(10);
 	}
 	
 	@Test
@@ -83,12 +85,13 @@ public class UsuariControllerTest {
 				"/usuari").accept(MediaType.APPLICATION_JSON);
 		
 		MvcResult result = mockMvc.perform(requestBuilder).andReturn();
-		String expected = tokenResDto.getToken()+tokenResDto.getId();
+		String expected = "{id:1,token: token}";
 		
 		JSONAssert.assertEquals(expected,result.getResponse().getContentAsString(),false);
 		
 	}
 	
+	/*
 	@Test
 	public void getUsuarisTest() throws Exception{
 		
@@ -101,9 +104,12 @@ public class UsuariControllerTest {
 		MvcResult result = mockMvc.perform(requestBuilder).andReturn();
 			
 	}
+	*/
 	
 	@Test
 	public void getUsuariconcretTest() throws Exception{
+		entityManager.persist(usuariDto);
+		entityManager.flush();
 		
 		Mockito.when(
 				usuariService.buscar(Mockito.anyInt())).thenReturn((usuariDto));
@@ -116,7 +122,6 @@ public class UsuariControllerTest {
 		JSONAssert.assertEquals(expected,result.getResponse().getContentAsString(),false);
 
 	}
-	
 	@Test
 	public void puntuarUsuariconcretTest() throws Exception{
 		
