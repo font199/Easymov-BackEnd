@@ -56,6 +56,7 @@ public class UsuariControllerTest {
 	@Before
 	 public void beforeEachTest (){
 		obs = new Obstacle();
+		obs.setId(0);
 		obs.setNom("Escales");
 		obs.setDescripcio("Moltes Escales");
 		obs.setLatitud(123.23);
@@ -73,8 +74,7 @@ public class UsuariControllerTest {
 		
 		tokenResDto = new TokenResDto();
 		tokenResDto.setId(1);
-		tokenResDto.setToken("token")
-		;
+		tokenResDto.setToken("token");
 		 puntuacioDto = new PuntuacioDto();
 		puntuacioDto.setPuntuacio(10);
 		//tokenResDto = mock(TokenResDto.class);
